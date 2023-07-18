@@ -2,18 +2,13 @@ import express from 'express';
 
 const cors = require('cors');
 app.use(cors());
+app.use(express.json())
 
 
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://althertech23:ko230193@alther.2ec0f.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, });
 
-
-
-app.use(express.json());
-
-const app = express()
-app.use(express.json())
 
 const port = process.env.PORT ?? 4000
 
