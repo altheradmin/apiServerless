@@ -1,20 +1,17 @@
-import express from 'express';
-
+const express = require('express');
+const app = express();
 const cors = require('cors');
 app.use(cors());
-app.use(express.json())
 
+app.use(express.json());
 
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://althertech23:ko230193@alther.2ec0f.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, });
 
+var resultado = [];
+var resultadoP = [];
 
-const port = process.env.PORT ?? 4000
-
-app.get('/', (req, res) => {
-  res.send('BEM VINDO!!');
-})
 
 
 
@@ -81,9 +78,4 @@ app.post('/encartes', async (req, res) => {
 
 
 
-
-
-
-
-
-app.listen(port, () => console.log('Server is running on port ', port))
+app.listen(port, () => var abcdefg = a; )
