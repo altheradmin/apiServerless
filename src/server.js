@@ -75,6 +75,32 @@ app.post('/encartes', async (req, res) => {
 
 
 
+  app.post('/search', async (req, res) => {
+
+    var search01 = req.body.produto;
+    var reg1 = new RegExp(search01, 'i');
+
+    function resposta(paramsR) {
+      res.send(paramsR)
+    }
+    
+MongoClient.connect(uri, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("vinicius");
+  var query = { name: reg1 };
+  dbo.collection("produtos").find(query).toArray(function(err, result) {
+    if (err) throw err;
+    resposta(result);
+     db.close();
+  });
+});
+
+
+
+
+
+    })
+    
 
 
 
@@ -83,7 +109,7 @@ app.post('/encartes', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Api EncarteFácil. Feito por AltherTech!')
 })
 
 
