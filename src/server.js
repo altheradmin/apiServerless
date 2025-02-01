@@ -2,10 +2,21 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 app.use(cors({
-    origin: '*'
+    origin: '*',
+    methods: ["GET", "POST"]
 }));
 
+
 app.use(express.json());
+
+
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+
 
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://althertech23:ko230193@alther.2ec0f.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -18,7 +29,7 @@ var resultadoP = [];
 const port = process.env.PORT ?? 4000;
 
 
-app.post('/gravar', async (req, res) => {
+app.post('/gravar', cors(corsOptions), async (req, res) => {
   res.send('STATUS OK');
 var objobj = req.body;
 
@@ -40,7 +51,7 @@ MongoClient.connect(uri, function(err, db) {
 
 
 
-app.post('/leitura', async (req, res) => {
+app.post('/leitura', cors(corsOptions), async (req, res) => {
 
 function all(params) {
   res.send(params);
@@ -57,7 +68,7 @@ MongoClient.connect(uri, function(err, db) {
 
 })
 
-app.post('/encartes', async (req, res) => {
+app.post('/encartes', cors(corsOptions), async (req, res) => {
 
   function all(params) {
     res.send(params);
@@ -77,7 +88,7 @@ app.post('/encartes', async (req, res) => {
 
 
 
-  app.post('/search', async (req, res) => {
+  app.post('/search', cors(corsOptions), async (req, res) => {
 
     var search01 = req.body.produto;
     var reg1 = new RegExp(search01, 'i');
@@ -110,7 +121,7 @@ MongoClient.connect(uri, function(err, db) {
 
 
 
-app.get('/', (req, res) => {
+app.get('/', cors(corsOptions), (req, res) => {
   res.send('Api EncarteFácil. Feito por AltherTech!')
 })
 
